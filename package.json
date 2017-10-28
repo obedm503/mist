@@ -12,7 +12,7 @@
     "build:server": "tsc -p src/server/tsconfig.json",
     "build:client": "node build/build.js",
     "dev": "",
-    "dev:dev": "tsc-watch --onSuccess 'node ./dist/server/index.js'",
+    "dev:server": "tsc-watch --onSuccess 'node ./dist/server/index.js'",
     "dev:client": "node build/dev-server.js"
   },
   "keywords": [
