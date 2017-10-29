@@ -20,7 +20,7 @@ const port = process.env.PORT || config.dev.port
 const autoOpenBrowser = !!config.dev.autoOpenBrowser
 // Define HTTP proxies to your custom API backend
 // https://github.com/chimurai/http-proxy-middleware
-const proxyTable = config.dev.proxyTable
+// const proxyTable = config.dev.proxyTable
 
 const app = express()
 const compiler = webpack(webpackConfig)

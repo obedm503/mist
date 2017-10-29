@@ -3,6 +3,7 @@ import { Request } from 'koa';
 import * as chalk from 'chalk';
 import low from './db';
 import { pattern } from './schema';
+import * as cuid from 'cuid';
 
 const router = new Router({ prefix: '/api' });
 
@@ -20,7 +21,7 @@ low.then((db: any) => {
       await next();
       pattern(request.body);
       const { name } = request.body;
-      const create = { name };
+      const create = { name, id: cuid() };
       await db
         .get('patterns')
         .push(create)
@@ -37,11 +38,11 @@ low.then((db: any) => {
     try {
       await next();
       pattern(request.body);
-      const { name } = request.body;
-      const create = { name };
+      const { name, id } = request.body;
+      const create = { name, id };
       await db
         .get('patterns')
-        .find({ name })
+        .find({ id })
         .assign(create)
         .write();
 
@@ -57,8 +58,10 @@ low.then((db: any) => {
       await next();
       await db
         .get('patterns')
-        .remove({ name: params.id })
+        .remove({ id: params.id })
         .write();
+      response.body = db.get('patterns').value();
+      response.status = 200;
     } catch (e) {
       response.body = e.message;
     }

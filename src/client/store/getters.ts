@@ -1,0 +1,1 @@
+export const patterns = state => state.patterns;
