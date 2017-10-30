@@ -14,7 +14,7 @@ import * as webpackConfig from '../../build/webpack.dev.conf';
 import * as config from '../../config';
 
 const app = new Koa();
-const port = process.env.PORT || config.dev.port;
+const port = process.env.NODE_ENV === 'production' ? 80 : (process.env.PORT || config.dev.port);
 
 if (process.env.NODE_ENV === 'production') {
   app.use(koaStatic(join(__dirname, '../client/')) as any);
