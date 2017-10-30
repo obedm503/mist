@@ -27,7 +27,8 @@ low.then((db: any) => {
         .push(create)
         .write();
 
-      response.body = create;
+      response.body = db.get('patterns').value();
+      response.status = 200;
     } catch (e) {
       response.body = e.message;
     }
@@ -46,7 +47,8 @@ low.then((db: any) => {
         .assign(create)
         .write();
 
-      response.body = create;
+      response.body = db.get('patterns').value();
+      response.status = 200;
     } catch (e) {
       response.body = e.message;
     }

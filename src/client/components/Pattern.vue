@@ -17,37 +17,20 @@
         <a class="card-footer-item" @click="showModal">
           Edit
         </a>
-        <a class="card-footer-item">
+        <a class="card-footer-item" @click="deletePattern">
           Delete
         </a>
       </footer>
     </div>
 
-    <div class="modal" :class="{ 'is-active': isModalActive }">
-      <div class="modal-background"></div>
-      <div class="modal-card">
-        <header class="modal-card-head">
-          <p class="modal-card-title">
-            {{ pattern.name }}
-          </p>
-          <button class="delete" aria-label="close" @click="hideModal"></button>
-        </header>
-        <section class="modal-card-body">
-          <div class="content">
-            {{ pattern.name }}
-          </div>
-        </section>
-        <footer class="modal-card-foot">
-          <button class="button is-success" @click="hideModal">Save changes</button>
-          <button class="button" @click="hideModal">Cancel</button>
-        </footer>
-      </div>
-    </div>
+    <app-pattern-modal :pattern="pattern" :active="isModalActive" @hide="hideModal"></app-pattern-modal>
   </div>
 </template>
 
 <script lang="ts">
 import Vue from "vue";
+
+import AppPatternModal from './PatternModal';
 
 export default Vue.extend({
   props: ['pattern'],
@@ -62,7 +45,16 @@ export default Vue.extend({
     },
     hideModal() {
       this.isModalActive = false;
-    }
+    },
+    deletePattern() {
+      this.$store.dispatch({
+        type: 'deletePattern',
+        id: this.pattern.id,
+      });
+    },
+  },
+  components: {
+    AppPatternModal
   }
 });
 </script>
