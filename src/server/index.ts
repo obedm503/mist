@@ -8,8 +8,7 @@ import { join } from 'path';
 import router from './routes';
 
 import * as webpack from 'webpack';
-import * as webpackDev from 'koa-webpack-dev-middleware';
-import * as webpackHot from 'koa-webpack-hot-middleware';
+import * as koaWebpack from 'koa-webpack';
 import * as webpackConfig from '../../build/webpack.dev.conf';
 import * as config from '../../config';
 
@@ -20,19 +19,23 @@ if (process.env.NODE_ENV === 'production') {
   app.use(koaStatic(join(__dirname, '../client/')) as any);
 } else {
   const compiler = webpack(webpackConfig);
-  const hotMiddleware = webpackHot(compiler, {
-    log: false
+  const middleware = koaWebpack({
+    compiler,
+    hot: {
+      log: false,
+    },
+    dev: {
+      publicPath: '/',
+      quiet: true,
+    },
   });
-  compiler.plugin('compilation', function (compilation: any) {
-    compilation.plugin('html-webpack-plugin-after-emit', function (data: any, cb: any) {
-      hotMiddleware.publish({ action: 'reload' });
-      cb();
+  compiler.plugin('compilation', (compilation: any) => {
+    compilation.plugin('html-webpack-plugin-after-emit', (data: any, callback: any) => {
+      middleware.hot.publish({ action: 'reload' });
+      callback();
     });
   });
-  app.use(webpackDev(compiler, {
-    publicPath: '/',
-    quiet: true
-  })).use(hotMiddleware);
+  app.use(middleware);
 }
 app.use(bodyParser())
   .use(router.routes())

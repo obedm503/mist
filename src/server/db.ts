@@ -3,7 +3,7 @@ import { join } from 'path';
 const low = require('lowdb');
 const FileAsync = require('lowdb/adapters/FileAsync');
 
-const defaults: any = { patterns: [] };
+const defaults: any = { patterns: [], config: {} };
 const url = join(__dirname, 'db.json');
 
 export default fs.readJson(url)
