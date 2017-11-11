@@ -15,4 +15,6 @@ parts:
   mist:
     # See 'snapcraft plugins'
     plugin: nodejs
+    node-package-manager: yarn
+    npm-run: [build]
     source: https://github.com/obedm503/mist.git
