@@ -14,7 +14,7 @@
 import Vue from "vue";
 import { mapGetters } from "vuex";
 
-import AppPattern from "./Pattern";
+import AppPattern from "../components/Pattern";
 
 export default Vue.extend({
   computed: mapGetters(["patterns"]),
