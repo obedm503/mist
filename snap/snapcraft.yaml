@@ -17,4 +17,5 @@ parts:
     # See 'snapcraft plugins'
     plugin: nodejs
     npm-run: [build]
+    node-engine: 8.9.1
     source: https://github.com/obedm503/mist.git
