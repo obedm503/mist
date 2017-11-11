@@ -6,9 +6,9 @@
   "main": "dist/server/index.js",
   "scripts": {
     "clean": "npx del-cli 'dist' '!dist/server/db.json'",
-    "start": "NODE_ENV=production node dist/server/index.js",
+    "start": "node dist/server/index.js",
     "lint": "npx tslint src/**/*.ts",
-    "dev": "npx tsc-watch -p src/server/tsconfig.json --onSuccess 'node ./dist/server/index.js'",
+    "dev": "npx tsc-watch -p src/server/tsconfig.json --onSuccess 'NODE_ENV=development node ./dist/server/index.js'",
     "build": "npm run clean && npm run build:client && npm run build:server",
     "build:client": "node build/build.js",
     "build:server": "npx tsc -p src/server/tsconfig.json"
