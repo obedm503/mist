@@ -10,7 +10,9 @@ confinement: strict # use 'strict' once you have the right plugs and slots
 apps:
   mist:
     command: npm start
-    plugs: [network-bind]
+    plugs:
+      - network-bind
+      - home
 
 parts:
   mist:
