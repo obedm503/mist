@@ -4,3 +4,6 @@ dist
 parts/
 prime/
 stage/
+snap/.snapcraft/
+*.log
+*.snap
