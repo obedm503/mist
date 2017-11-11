@@ -10,6 +10,7 @@ confinement: devmode # use 'strict' once you have the right plugs and slots
 apps:
   mist:
     command: mist
+    plugs: [network-bind]
 
 parts:
   mist:
