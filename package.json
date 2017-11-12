@@ -3,7 +3,10 @@
   "version": "2.0.0",
   "private": true,
   "description": "A boilerplate for using Koa2 with TypeScript",
-  "main": "dist/server/index.js",
+  "main": "bin/mist",
+  "bin": {
+    "mist": "bin/mist"
+  },
   "scripts": {
     "clean": "npx del-cli 'dist' '!dist/server/db.json'",
     "start": "NODE_ENV=production node dist/server/index.js",
