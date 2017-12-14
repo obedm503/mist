@@ -1,28 +1,6 @@
 <template>
   <div id="app">
-    <nav class="navbar is-info" role="navigation" aria-label="main navigation">
-      <div class="navbar-brand" id="main-nav">
-        <div class="navbar-item">
-          Mist
-        </div>
-        <div class="navbar-item" id="new-pattern">
-          <button class="button is-success" @click="showModal">
-            <span class="icon">
-              <i class="ion ion-plus-round"></i>
-            </span>
-            <span>
-              New Pattern
-            </span>
-          </button>
-        </div>
-      </div>
-    </nav>
-
-    <main>
-      <router-view></router-view>
-    </main>
-
-    <app-pattern-modal :active="isModalActive" @hide="hideModal"></app-pattern-modal>
+    <router-view></router-view>
   </div>
 </template>
 
@@ -55,7 +33,39 @@ export default Vue.extend({
 </script>
 
 <style lang="scss">
+// 1. Import the initial variables
+@import "../../node_modules/bulma/sass/utilities/initial-variables";
+@import "../../node_modules/bulma/sass/utilities/functions";
+
+// 2. Set your own initial variables
+// Update blue
+$blue: #72d0eb;
+// Add pink and its invert
+$pink: #ffb3b3;
+$pink-invert: #fff;
+
+// 3. Set the derived variables
+// Use the new pink as the primary color
+$primary: $pink;
+$primary-invert: $pink-invert;
+
+// 4. Setup your Custom Colors
+$linkedin: #0077b5;
+
+// 5. Add new color variables to the color map.
+@import "../../node_modules/bulma/sass/utilities/derived-variables.sass";
+$addColors: (
+  "linkedin": ($linkedin, findColorInvert($linkedin)),
+);
+$colors: map-merge($colors, $addColors);
+
+// 6. Import the rest of Bulma
 @import "../../node_modules/bulma/bulma.sass";
+
+html, body, #app, #main {
+  width: 100%;
+  height: 100%;
+}
 
 #main-nav {
   width: 100%;

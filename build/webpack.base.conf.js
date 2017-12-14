@@ -19,9 +19,10 @@ module.exports = {
     publicPath: '/'
   },
   resolve: {
-    extensions: ['.ts', '.js', '.vue', '.json'],
+    extensions: ['.ts', '.js', '.vue', '.json', '.scss', '.sass'],
     alias: {
-      '@': resolve('src/')
+      '@': resolve('src'),
+      '~': resolve('node_modules'),
     }
   },
   module: {
